@@ -1,53 +1,37 @@
 <template>
   <div class="hello" v-if="jogos.length">
     <div class="card-deck">
-      <div class="card">
+      <div class="card" v-for="(item, index) in lista" :key="index">
         <div class="divImg">
-          <img :src="jogos[0].img" width="150">
+          <img :src="item.img" width="150">
         </div>
-        <div class="plataforma">{{ jogos[0].plataforma }}</div>
+        <div class="plataforma">{{ item.plataforma }}</div>
         <div class="card-body" style="padding: 0 10px 10px 10px">
-          <div class="card-title titulo">{{ jogos[0].nome }}</div>
-          <div class="preco">{{ jogos[0].preco | currency }}</div>
+          <div class="card-title titulo">{{ item.nome }}</div>
+          <div class="preco">{{ item.preco | currency }}</div>
         </div>
         <div class="card-footer text-white adcCarrinho">
           <div>Adicionar ao carrinho</div>
         </div>
       </div>
-      <div class="card">
-        <!--<img src="..." class="card-img-top" alt="...">-->
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-        </div>
-        <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-      </div>
-      <div class="card">
-        <!--<img src="..." class="card-img-top" alt="...">-->
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
-            This card has even longer content than the first to show that equal height action.</p>
-        </div>
-        <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-      </div>
-
-      <div class="card">
-        <!--<img src="..." class="card-img-top" alt="...">-->
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
-            This card has even longer content than the first to show that equal height action.</p>
-        </div>
-        <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-      </div>
     </div>
+
+    <nav style="margin-top: 20px">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
 
@@ -65,7 +49,20 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['corSubmenu'])
+    ...mapGetters(['getPlataforma']),
+    lista () {
+      let novaLista = []
+      if (this.getPlataforma) {
+        this.jogos.forEach(item => {
+          if (item.plataforma === this.getPlataforma) {
+            novaLista.push(item)
+          }
+        })
+        return novaLista
+      } else {
+        return this.jogos
+      }
+    }
   }
 }
 </script>
