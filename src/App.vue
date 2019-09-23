@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <shop-menu/>
-    <div class="container mrgTop20">
+    <!--<div class="container mrgTop20">-->
       <router-view/>
-    </div>
+    <!--</div>-->
   </div>
 </template>
 
