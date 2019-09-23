@@ -39,7 +39,7 @@
     <div class="container mt-3">
       <div class="card-deck animated fadeIn ml-1 alinhamento">
         <div class="card tamanhoCard" v-for="(item, index) in lista" :key="index">
-          <div class="divImg">
+          <div class="divImg" @click="detalhe(item)">
             <img :src="item.img" width="150">
           </div>
           <div class="plataforma" :style="{color: corNomePlataforma(item.plataforma)}">{{ item.plataforma }}</div>
@@ -87,9 +87,12 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setCorSubMenu', 'setPlataforma', 'setMeusProdutos']),
+    ...mapMutations(['setCorSubMenu', 'setPlataforma', 'setMeusProdutos', 'setProdutoDetalhe']),
+    detalhe (produto) {
+      this.setProdutoDetalhe(produto)
+      this.$router.push('/produto/' + produto.id)
+    },
     corNomePlataforma (plataforma) {
-      console.log('passou', plataforma)
       switch (plataforma) {
         case 'PS 4':
           return 'blue'
@@ -105,6 +108,11 @@ export default {
     addProduto (produto) {
       if (this.getMeusProdutos.filter(item => item.id === produto.id) > -1) {
         this.setMeusProdutos(produto)
+        this.$toasted.show(produto.nome + ' adicionado ao seu carrinho.', {
+          position: 'top-center',
+          type: 'success',
+          duration: 3000
+        })
       } else {
         this.$toasted.show(produto.nome + ' já está no seu carrinho.', {
           position: 'top-center',

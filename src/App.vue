@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <shop-menu/>
-    <!--<div class="container mrgTop20">-->
       <router-view/>
-    <!--</div>-->
   </div>
 </template>
 
@@ -17,7 +15,6 @@ export default {
 </script>
 
 <style>
-  .mrgTop20 {margin-top: 20px}
 #app {
   text-align: center;
   color: #2c3e50;
