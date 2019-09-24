@@ -17,8 +17,12 @@
               <div class="card-body">
 
                 <ul class="list-group text-left">
-                  <li class="list-group-item">Código: {{ produto.id }}</li>
-                  <li class="list-group-item">Plataforma: {{ produto.plataforma }}</li>
+                  <li class="list-group-item"><strong>Código:</strong> {{ produto.id }}</li>
+                  <li class="list-group-item"><strong>Plataforma:</strong> {{ produto.plataforma }}</li>
+                  <li class="list-group-item"><strong>Descrição:</strong> {{ produto.descricao }}</li>
+                  <li class="list-group-item">
+                    <star-rating read-only :rating="produto.classificacao" show-rating star-size="30"></star-rating>
+                  </li>
                 </ul>
 
                 <div class="produtoPreco">{{ produto.preco | currency }}</div>
